@@ -2,7 +2,7 @@
 Description=GPIO Driver Initialization at Bootup
 
 [Service]
-ExecStart=/lib/modules/${uname -r}/aesdgpio_load
+ExecStart=/bin/sh -c '/lib/modules/$(uname -r)/aesdgpio_load'
 
 [Install]
 WantedBy=multi-user.target
