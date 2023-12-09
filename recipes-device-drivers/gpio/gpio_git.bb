@@ -16,7 +16,7 @@ file://S98lddmodules-gpio-start-stop.sh"
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
-SRCREV = "b891ac79c6a152ed91dd9265d22ca37de878f172"
+SRCREV = "6371c27d2e0f18c5997c8df483fa3b998bc8774c"
 
 S = "${WORKDIR}/git/"
 
@@ -30,8 +30,8 @@ inherit update-rc.d
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME = "S98lddmodules-gpio-start-stop"
 
-FILES:${PN} += "${bindir}/aesdgpio_load"
-FILES:${PN} += "${bindir}/aesdgpio_unload"
+FILES:${PN} += "${base_libdir}/modules/${KERNEL_VERSION}/aesdgpio_load"
+FILES:${PN} += "${base_libdir}/modules/${KERNEL_VERSION}/aesdgpio_unload"
 FILES:${PN} += "${bindir}/Makefile"
 FILES:${PN} += "${bindir}/gpio_driver.c"
 FILES:${PN} += "${sysconfdir}/*"
@@ -56,8 +56,8 @@ do_install () {
 	install -d ${D}${bindir}
 	install -d ${D}${sysconfdir}/init.d
     	install -d "${D}${base_libdir}/modules/${KERNEL_VERSION}/"
-	install -m 0755 ${S}/aesdgpio_load ${D}${bindir}/
-     	install -m 0755 ${S}/aesdgpio_unload ${D}${bindir}/
+	install -m 0755 ${S}/aesdgpio_load "${D}${base_libdir}/modules/${KERNEL_VERSION}/"
+     	install -m 0755 ${S}/aesdgpio_unload "${D}${base_libdir}/modules/${KERNEL_VERSION}/"
 	install -m 0755 ${S}/Makefile ${D}${bindir}/
 	install -m 0755 ${S}/gpio_driver.c ${D}${bindir}/
 	install -m 0755 ${WORKDIR}/S98lddmodules-gpio-start-stop.sh ${D}${sysconfdir}/init.d
