@@ -1,0 +1,8 @@
+[Unit]
+Description=GPIO Driver Initialization at Bootup
+
+[Service]
+ExecStart=/usr/bin/aesdgpio_load
+
+[Install]
+WantedBy=multi-user.target
